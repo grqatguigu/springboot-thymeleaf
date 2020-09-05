@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--这句声明使用thymeleaf标签-->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thymeleaf的入门</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<!--
+输出hello数据
+这句使用 th:text="${变量名}" 表示 使用thymeleaf获取文本数据，类似于EL表达式。
+thymeleaf：都是作用于HTML标签之上
+-->
+<p th:text="${hello}"></p>
+<form id="login-form" th:action="@{/hello}" method="post">
+    <button>提交</button>
+</form>
+<table border="1" >
+    <tr>
+        <td>下标</td>
+        <td>用户名</td>
+        <td>地址</td>
+    </tr>
+    <tr th:each="user,userStat:${list}">
+        <td>
+            <span th:text="${userStat.index+1}"></span>
+        </td>
+        <td th:text="${user.getName()}"></td>
+        <td th:text="${user.getAddress()}"></td>
+
+    </tr>
+
+</table>
+<table>
+    <h2>Map</h2>
+    <div>
+        <span th:text="${dataMap.No}"></span>
+    </div>
+    <div th:each="map:${dataMap}">
+        <span th:text="${map.key}"></span>:<span
+
+    </div>
+</table>
+
+    <div th:each="su,suStat:${num}">
+        <span th:text="${suStat.index+1}"></span>
+        <span th:text="${su}"></span>
+
+    </div>
+    <div>
+        <span th:text="${#dates.format(now,'yyyy-MM-dd HH:mm:ss')}"></span>
+    </div>
+    <div>
+        <span th:if="${age}>=18">成年了</span>
+        <span th:unless="${age}>=18">您未满18周岁，禁止进入网吧</span>
+    </div>
+<div th:include="footer::copy">
+
+</div>
+</body>
+</html>
